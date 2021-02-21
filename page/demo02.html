@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../layui-v2.5.6/layui/css/layui.css">
+    <script src="../js/layui.js"></script>
+    <script src="../layui-v2.5.6/layui/lay/modules/jquery.js"></script>
+</head>
+<body>
+<input id="a" type="text" value="111aaa">
+<script>
+    var re =/^[0-9]{3}$/
+    var a = document.getElementById('a')
+    a.onblur = function () {
+        if(re.test(a.value)==false){
+            alert("aaaa")
+        }
+    }
+</script>
+</body>
+</html>

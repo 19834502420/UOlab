@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/layuimini.css">
+    <link rel="stylesheet" href="../../layui-v2.5.6/layui/css/layui.css">
+    <script src="../../layui-v2.5.6/layui/layui.js"></script>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">技术专题</label>
+        <div class="layui-input-block">
+            <input type="text" id="cand" name="username" lay-verify="required" lay-reqtext="技术专题不能为空" placeholder="请输入您所要添加的技术专题名称"  required class="layui-input">
+            <tip>注意！必须填写字母和汉字组合，1-50个字符。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">主讲人</label>
+        <div class="layui-input-block">
+            <input type="text" id='name' name="username"   placeholder="请输入主讲人姓名"  class="layui-input">
+            <tip>注意！必须填写2-4个汉字。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">组织人名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" id="name2"  placeholder="请输入组织人姓名" value="" class="layui-input">
+            <tip>可以是多个人 包括学生和UOLad的老师 中间用（，）隔开即可。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">群体说明</label>
+        <div class="layui-input-block">
+            <input type="text" name="username"  required placeholder="请输入群体说明" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">加创新创业分值</label>
+        <div class="layui-input-block">
+            <input type="number" name="username"   placeholder="请输入分值" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label required">参加人数</label>
+    <div class="layui-input-block">
+        <input type="number" name="username"   placeholder="请输入分值" value="" class="layui-input">
+        <tip>请输入人数</tip>
+    </div>
+</div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">课堂上课地点</label>
+        <div class="layui-input-block">
+            <select name="quiz1" required>
+                <option value=""selected="">请选择</option>
+                <option value="G-A1阶" >G-A1阶</option>
+                <option value="G-A2阶">G-A2阶</option>
+                <option value="G-A3阶">G-A3阶</option>
+                <option value="G-A4阶">G-A4阶</option>
+                <option value="G-A5阶">G-A5阶</option>
+                <option value="G-A6阶">G-A6阶</option>
+                <option value="G-A7阶">G-A7阶</option>
+                <option value="G-A8阶">G-A8阶</option>
+                <option value="G-B1阶">G-B1阶</option>
+                <option value="G-B2阶">G-B2阶</option>
+                <option value="G-B3阶">G-B3阶</option>
+                <option value="G-B4阶">G-B4阶</option>
+                <option value="G-B5阶">G-B5阶</option>
+                <option value="G-B6阶">G-B6阶</option>
+                <option value="G-B7阶">G-B7阶</option>
+                <option value="G-B8阶">G-B8阶</option>
+            </select>
+        </div>
+    </div>
+        <div class="layui-form-item">
+        <label class="layui-form-label">课堂上课方式</label>
+        <div class="layui-input-block">
+            <select name="quiz1" required>
+                <option value=""selected="">请选择</option>
+                <option value="线下" >线下</option>
+                <option value="直播">直播</option>
+                <option value="录播">录播</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">加入日期</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="test11" placeholder="yyyy年MM月dd日">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注信息</label>
+        <div class="layui-input-block">
+            <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认添加</button>
+        </div>
+    </div>
+</div>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+
+                // 关闭弹出层
+                layer.close(index);
+
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(iframeIndex);
+
+            });
+
+            return false;
+        });
+
+    });
+    //日期范围
+</script>
+<script>
+    layui.use(['form','jquery','layer','laydate'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+            laydate = layui.laydate;
+        // id=cand正则验证
+        var a = document.getElementById('cand');
+        a.onblur = function () {
+            var reg =/^[\u4E00-\u9FA5]{1,50}$/;
+            if(reg.test(a.value)==false){
+                layer.msg('格式错误 必须是1-50个汉字');
+            }
+        };
+
+        //id=name的正则验证
+        var b = document.getElementById('name');
+        b.onblur = function () {
+            var re =/^[\u4E00-\u9FA5]{2,5}$/;
+            if(re.test(b.value)==false){
+                layer.msg('格式错误 必须是2-5个汉字');
+            }
+        };
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test11'
+            ,format: 'yyyy年MM月dd日'
+            ,trigger:'click'
+            ,min:'2020年12月30号'
+        });
+    });
+</script>
+</body>
+</html>

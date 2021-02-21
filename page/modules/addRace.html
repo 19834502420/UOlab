@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">题目</label>
+        <div class="layui-input-block">
+            <input type="text" id="cand" name="username" lay-verify="required" lay-reqtext="题目名不能为空" placeholder="请输入题目" value="" required class="layui-input">
+            <tip>注意！必须填写2-30个汉字。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">组长</label>
+        <div class="layui-input-block">
+            <input type="text" id="name" name="username" lay-verify="required" lay-reqtext="组长不能为空" placeholder="请输入组长" value="" class="layui-input">
+            <tip>注意！必须填写2-6个汉字。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">组员</label>
+        <div class="layui-input-block">
+            <input type="text" id="name1" name="username" lay-verify="required" lay-reqtext="组长不能为空" placeholder="请输入组长" value="" class="layui-input">
+            <tip>注意！必须填写2-6个汉字。</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">指导老师</label>
+        <div class="layui-input-block">
+            <input type="text" id="name2" name="username" lay-verify="required" lay-reqtext="组指导老师不能为空" placeholder="请输入指导老师" value="" class="layui-input">
+            <tip>注意！必须填写2-6个汉字。</tip>
+        </div>
+    </div>
+    <div class="layui-form layuimini-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">竞赛类别</label>
+            <div class="layui-input-block">
+                <select name="quiz1" required>
+                    <option value=""selected="">请选择</option>
+                    <option value="知识竞赛" >知识竞赛</option>
+                    <option value="体育竞赛" >体育竞赛</option>
+                    <option value="才艺竞赛" >才艺竞赛</option>
+                    <option value="国家级竞赛" >国家级竞赛</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">获奖等级</label>
+            <div class="layui-input-block">
+                <select name="quiz1" required>
+                    <option value=""selected="">无</option>
+                    <option value="特等奖" >特等奖</option>
+                    <option value="一等奖" >一等奖</option>
+                    <option value="二等奖" >二等奖</option>
+                    <option value="三等奖" >三等奖</option>
+                    <option value="优秀奖" >优秀奖</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">年度</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" id="test2" placeholder="yyyy">
+            </div></div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注信息</label>
+        <div class="layui-input-block">
+            <textarea name="remark" class="layui-textarea" placeholder="请输入备注信息"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认添加</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+
+                // 关闭弹出层
+                layer.close(index);
+
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(iframeIndex);
+
+            });
+
+            return false;
+        });
+
+    });
+</script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test2'
+            ,type: 'year'
+            , max:'2020'
+        });
+    });
+</script>
+<script>
+    layui.use(['form','jquery','layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+        // id=cand正则验证
+        var a = document.getElementById('cand');
+        a.onblur = function () {
+            var reg =/^[\u4E00-\u9FA5]{2,30}$/;
+            if(reg.test(a.value)==false){
+                layer.msg('题目格式错误 必须是2-30个汉字');
+            }
+        };
+
+        //id=name的正则验证
+        var b = document.getElementById('name');
+        b.onblur = function () {
+            var re =/^[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}$/;
+            if(re.test(b.value)==false){
+                layer.msg('组长姓名格式错误 1-3个人 每个人2-5个汉字 中间用，隔开');
+            }
+        };
+        var c = document.getElementById('name1');
+        c.onblur = function () {
+            var re =/^[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}$/;
+            if(re.test(c.value)==false){
+                layer.msg('组员姓名格式错误 2-5个人 每个人2-5个汉字 中间用，隔开');
+            }
+        };
+        var d = document.getElementById('name2');
+        d.onblur = function () {
+            var reg =/^[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}|[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5},[\u4E00-\u9FA5]{2,5}$/;
+            if(reg.test(d.value)==false){
+                layer.msg('指导老师姓名格式错误 1-3个人必须是2-5个汉字');
+            }
+        };
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test11'
+            ,trigger:'click'
+            ,format: 'yyyy年MM月dd日'
+        });
+    });
+</script>
+</body>
+</html>

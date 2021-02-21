@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>入门</title>
+    <script src="../js/lay-module/echarts/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        angleAxis: {
+        },
+        radiusAxis: {
+            type: 'category',
+            data: ['周一', '周二', '周三', '周四'],
+            z: 10
+        },
+        polar: {
+        },
+        series: [{
+            type: 'bar',
+            data: [1, 2, 3, 4],
+            coordinateSystem: 'polar',
+            name: 'A',
+            stack: 'a',
+            emphasis: {
+                focus: 'series'
+            }
+        }, {
+            type: 'bar',
+            data: [2, 4, 6, 8],
+            coordinateSystem: 'polar',
+            name: 'B',
+            stack: 'a',
+            emphasis: {
+                focus: 'series'
+            }
+        }, {
+            type: 'bar',
+            data: [1, 2, 3, 4],
+            coordinateSystem: 'polar',
+            name: 'C',
+            stack: 'a',
+            emphasis: {
+                focus: 'series'
+            }
+        }],
+        legend: {
+            show: true,
+            data: ['A', 'B', 'C']
+        }
+    };
+
+    option && myChart.setOption(option);
+</script>
+</body>
+
+</html>

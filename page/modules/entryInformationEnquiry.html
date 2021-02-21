@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="../../layui-v2.5.6/layui/css/layui.css">
+    <script src="../../layui-v2.5.6/layui/layui.js"></script>
+</head>
+<body>
+<!--查询开始位置-->
+<form class="layui-form" action="">
+    <div class="layui-inline">
+        <label class="layui-form-label">年度</label>
+        <div class="layui-input-inline">
+            <input type="text" class="layui-input" id="test2" placeholder="yyyy">
+        </div>
+        <div class="layui-inline">
+            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="currentTableBar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">修改获奖等级</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">修改成员</a>
+</script>
+<table id="demo" lay-filter="test"></table>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 312
+            ,url: '../../api/upload.json/' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                ,{field: 'lay', title: '比赛类别', width:150,align: "center"}
+                ,{field: 'year', title: '年度', width:150, sort: true,align: "center"}
+                ,{field: 'title', title: '题目', width:150,align: "center"}
+                ,{field: 'groun', title: '组长', width: 150,align: "center"}
+                ,{field: 'stal', title: '组员', width: 200,align: "center"}
+                ,{field: 'score', title: '获奖等级', width: 140, sort: true,align: "center"}
+                ,{field: 'teacher', title: '指导老师', width: 120,align: "center"}
+                ,{title: '操作', minWidth: 80, toolbar: '#currentTableBar', align: "center"}
+            ]]
+        });
+
+    });
+</script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test2'
+            ,type: 'year'
+            , max:'2020'
+        });
+    });
+</script>
+</body>
+</html>
